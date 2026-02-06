@@ -1,18 +1,20 @@
 import axios from "axios";
-const apiUrl = process.env.REACT_APP_BACKEND_URL //"http://localhost:8080/api/tasks";
-console.log(apiUrl)
-export function getTasks() {
-    return axios.get(apiUrl);
-}
 
-export function addTask(task) {
-    return axios.post(apiUrl, task);
-}
+// Use relative path so the browser hits the ALB Ingress
+const API_URL = "/api";
 
-export function updateTask(id, task) {
-    return axios.put(apiUrl + "/" + id, task);
-}
+export const getTasks = () => {
+    return axios.get(`${API_URL}/tasks`);
+};
 
-export function deleteTask(id) {
-    return axios.delete(apiUrl + "/" + id);
-}
+export const addTask = (task) => {
+    return axios.post(`${API_URL}/tasks`, task);
+};
+
+export const updateTask = (id, data) => {
+    return axios.put(`${API_URL}/tasks/${id}`, data);
+};
+
+export const deleteTask = (id) => {
+    return axios.delete(`${API_URL}/tasks/${id}`);
+};
